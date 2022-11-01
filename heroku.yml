@@ -1,9 +1,5 @@
-     Excon.stub({:method => :put, :path => "/apps/example/buildpack-installations"},
-        {:status => 200})
-      stub_get("https://github.com/heroku/heroku-buildpack-ruby")
-    end
-        expect(stdout).to eq <<-STDOUT
-=== example Buildpack URL
-https://github.com/heroku/heroku-buildpack-ruby
-        STDOUT
-      end
+	@echo "Building nginx in Docker for heroku-18..."
+	@docker run -v $(shell pwd):/buildpack --rm -it -e "STACK=heroku-18" -w /buildpack heroku/heroku:18-build scripts/build_nginx /buildpack/nginx-heroku-18.tgz
+build-heroku-20:
+	@echo "Building nginx in Docker for heroku-20..."
+	@docker run -v $(shell pwd):/buildpack --rm -it -e "STACK=heroku-20" -w /buildpack heroku/heroku:20-build scripts/build_nginx /buildpack/nginx-heroku-20.tgz
